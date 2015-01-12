@@ -21,7 +21,7 @@ namespace MahApps.Metro.Controls
 
         public static readonly DependencyProperty MaxSideLengthProperty = DependencyProperty.Register("MaxSideLength", typeof(double), typeof(ProgressRing), new PropertyMetadata(default(double)));
 
-        public static readonly DependencyProperty EllipseDiameterProperty = DependencyProperty.Register("EllipseDiameter", typeof(double), typeof(ProgressRing), new PropertyMetadata(default(double)));
+        public static readonly DependencyProperty EllipseDiameterProperty = DependencyProperty.Register("EllipseDiameter", typeof(double), typeof(ProgressRing), new PropertyMetadata(7.0d));
 
         public static readonly DependencyProperty EllipseOffsetProperty = DependencyProperty.Register("EllipseOffset", typeof(Thickness), typeof(ProgressRing), new PropertyMetadata(default(Thickness)));
 
@@ -62,7 +62,7 @@ namespace MahApps.Metro.Controls
         public double EllipseDiameter
         {
             get { return (double)GetValue(EllipseDiameterProperty); }
-            private set { SetValue(EllipseDiameterProperty, value); }
+            set { SetValue(EllipseDiameterProperty, value); }
         }
 
         public Thickness EllipseOffset
@@ -96,9 +96,7 @@ namespace MahApps.Metro.Controls
                 return;
 
             var action = new Action(() =>
-            {
-                ring.SetEllipseDiameter(
-                    (double) dependencyPropertyChangedEventArgs.NewValue);
+            {                
                 ring.SetEllipseOffset(
                     (double) dependencyPropertyChangedEventArgs.NewValue);
                 ring.SetMaxSideLength(
@@ -114,13 +112,8 @@ namespace MahApps.Metro.Controls
         private void SetMaxSideLength(double width)
         {
             MaxSideLength = width <= 20 ? 20 : width;
-        }
-
-        private void SetEllipseDiameter(double width)
-        {
-            EllipseDiameter = width / 8;
-        }
-
+        }   
+     
         private void SetEllipseOffset(double width)
         {
             EllipseOffset = new Thickness(0, width / 2, 0, 0);
